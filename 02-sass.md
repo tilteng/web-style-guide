@@ -1,6 +1,6 @@
 # SASS
 
-Give color variable's generic names
+Give color variables generic names
 
 Bad `$tilt-blue; $tilt-almost-black`
 
