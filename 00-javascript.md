@@ -1,8 +1,8 @@
 # JavaScript
-
 We use [Babel](https://babeljs.io/) for compiling our code into Javascript. It
 polyfills most of the standard built-in objects to match the documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)
-and compiles from ES6 into Javascript. Unless otherwise specified, an ES6 feature
+and compiles from ES6 into Javascript. Unless otherwise specified, an [ES6 feature](http://babeljs.io/docs/learn-es2015/)
+
 is considered good practice, specially if it makes the code easier to understand.
 
 
@@ -11,7 +11,8 @@ is considered good practice, specially if it makes the code easier to understand
 We have chosen to use the CommonJS syntax (`require()` and `module.exports`) for
 requiring and exporting modules.
 
-Include all your requires at the top of the file using `const`. Both single declaration and multiple declaration are valid.
+Include all your requires at the top of the file using `const`. Both single
+declaration and multiple declaration are valid.
 
 ```javascript
 // SomeComponent.js
@@ -29,7 +30,8 @@ const SendEmailLightbox = require('../lightboxes/SendEmailLightbox');
 const LightboxBase = require('root/lightbox/LightboxBase');
 ```
 
-- The base of the project is `root`. Use it as an alternative to relative paths.
+- Webpack generates a project that uses `root` as a base. It can be used as an
+alternative to relative paths on code that does not run in the express server.
 - Don't use default exports as they are not easy to include using CommonJS.
 - Don't require modules dynamically as this makes them hard to validate on compile
 time.
@@ -81,7 +83,7 @@ Promises first as they keep the interface predictable.
 ### Ajax requests
 
 We use [superagent](http://visionmedia.github.io/superagent/) for http calls.
-Ajax calls should live inside Actions and ideally handle callbacks via Promises.
+Ajax calls should live inside ActionCreators and ideally handle callbacks via Promises.
 
 ```javascript
 const request = require('superagent');
@@ -180,12 +182,22 @@ typeof someObject === "function";
 Both jQuery and underscore provide shorthand functions for iterating over key-value
 pairs in objects.
 
+
+Don't do:
+
 ```javascript
-$.each(someObject, function(value, key) {
+$.each(someObject, function(key, value) {
 });
 _.each(someObject, function(value, key) {
 });
+
+for (let i = 0; i < someArray.length; i++) {
+}
+
+for (let i in someObject) {}
 ```
+
+Yes do:
 
 ```javascript
 // Iterating over values on an array
@@ -195,4 +207,36 @@ someArray.forEach(function(index, value) {});
 Object.keys(someObject).forEach(function(key) {
     const value = someObject[key];
 });
+```
+
+- `Array.prototype.forEach` returns undefined. This is different from the library
+functions which return the called object.
+
+### Testing values in array
+
+Use the built-in array methods for testing if values are present in the array.
+
+```javascript
+_.every(someArray, function(value, index) {});
+_.some(someArray, function(value, index) {});
+```
+
+```javascript
+someArray.every(function(value, index) {});
+someArray.some(function(value, index) {});
+```
+
+### Array filtering
+
+Don't do
+
+```javascript
+$.grep(array, function() {});
+_.filter(array, function() {});
+```
+
+Do
+
+```javascript
+array.filter(function() {});
 ```
