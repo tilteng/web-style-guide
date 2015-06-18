@@ -104,6 +104,8 @@ Otherwise, you will have to use curly braces to create a new block.
 }
 ```
 
+Never use the `var self = this;` pattern.
+
 ## Modules
 
 We have chosen to use the CommonJS syntax (`require()` and `module.exports`) for
