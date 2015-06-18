@@ -14,6 +14,8 @@
 
 When joining the project you should look at the most recent pull requests that
 are being produced in a repo and try to follow their general style conventions.
+**The best way to learn a project's style is to read code.**
+
 If anything is unclear please ask!
 
 ## Babel and ES6
