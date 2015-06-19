@@ -1,10 +1,117 @@
 # JavaScript
+
+## The Basics
+
+* 4 character space indents, no tabs
+* Semicolons end a line
+* "Best effort" 80 character line limit.  Set a ruler in your editor.  Small 
+  deviations are okay for very long strings that can't be reasonably broken
+  up, but most of your code should fall within the 80 character line limit.
+* Use strict equality for comparing values: `===`, `!==`
+* camelCased variables
+* No global references (e.g. defined without `let`, `const`, `var`, `function`)
+* Prefer single quotes to double quotes for strings
+
+When joining the project you should look at the most recent pull requests that
+are being produced in a repo and try to follow their general style conventions.
+**The best way to learn a project's style is to read code.**
+
+If you are just getting started with JavaScript (especially modern use of the
+language), a great guide for general style is 
+[Airbnb's style guide](https://github.com/airbnb/javascript).
+
+If anything is unclear please ask!
+
+## Babel and ES6
+
 We use [Babel](https://babeljs.io/) for compiling our code into Javascript. It
 polyfills most of the standard built-in objects to match the documentation on [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects)
-and compiles from ES6 into Javascript. Unless otherwise specified, an [ES6 feature](http://babeljs.io/docs/learn-es2015/)
+and compiles from ES6 into Javascript. Unless otherwise specified, an [ES6 feature](http://babeljs.io/docs/learn-es2015/) is considered good practice, specially if it makes the code easier to understand.
 
-is considered good practice, specially if it makes the code easier to understand.
+## References
 
+Do not use the `var` keyword.  Variables declared with `var` live in the 
+function scope, not block scope.  Block scope behaves more predictably and 
+should be preferred in all cases.
+
+```javascript
+if (a > 3) {
+    var i = 3;
+}
+
+console.log(i); // outputs 3
+```
+
+```javascript
+if (a > 3) {
+    let i = 3;
+}
+
+console.log(i); // reference error
+```
+
+Prefer to use `const` for all reference declarations.  Variables declared as
+`const` cannot be reassigned - this will result in Babel throwing an error at
+compile-time (not runtime).
+
+```javascript
+const a = 1;
+
+console.log(a);
+```
+
+If you must reassign a reference (for example, keeping a running counter), use
+a `let` declaration.
+
+```javascript 
+let a = 0;
+if (b > 0) {
+    a = a + 1;
+}
+```
+
+https://github.com/airbnb/javascript#references for more information.
+
+## Callbacks and the "this" keyword
+
+Avoid rebinding the `this` keyword.  ES6 arrow functions make it so that in most
+cases you can avoid using `bind`, `call`, `apply`, and so forth.
+
+Don't do:
+
+```
+function() {
+    this.setState({ foo: 'bar' });
+}.bind(this);
+```
+
+Instead use ES6 arrow functions to automatically re-bind `this` in the scope of
+the anonymous function:
+
+```
+() => this.setState({ foo: 'bar' });
+```
+
+If the function you need to bind is a 1-line function you can just inline the 
+expression:
+
+```
+() => foo()
+```
+
+1-line functions will return their last value, making them very convenient to 
+use in combination with iteration functions that expect a value like `.map()`.
+
+Otherwise, you will have to use curly braces to create a new block.
+
+```
+() => {
+    foo();
+    bar();
+}
+```
+
+Never use the `var self = this;` pattern.
 
 ## Modules
 
@@ -35,7 +142,6 @@ alternative to relative paths on code that does not run in the express server.
 - Don't use default exports as they are not easy to include using CommonJS.
 - Don't require modules dynamically as this makes them hard to validate on compile
 time.
-
 
 ## Declaring objects
 
@@ -89,19 +195,19 @@ Ajax calls should live inside ActionCreators and ideally handle callbacks via Pr
 const request = require('superagent');
 
 UserActions.verifyEmail: function(dispatcher, email) {
-  return new Promise(function(resolve, reject) {
-    request
-      .put('/email/verify')
-      .csrf()
-      .send({ email: email })
-      .end(function(err, res) {
-          if(err) {
-            reject(err);
-          }
-          else {
-            dispatcher.dispatch('userResetInfo', res.body);
-            resolve(res.body);
-          }
+    return new Promise(function(resolve, reject) {
+        request
+            .put('/email/verify')
+            .csrf()
+            .send({ email: email })
+            .end(function(err, res) {
+            // err will be set on any non-2xx response
+            if(err) {
+                reject(err);
+            } else {
+                dispatcher.dispatch('userResetInfo', res.body);
+                resolve(res.body);
+            }
       });
   });
 };
@@ -114,23 +220,23 @@ the promise to track the loading state.
 ```javascript
 // UserEmailVerify.js
 //........
-  handleVerifySubmit(email) {
-    this.setState({
-      isLoading: true
-    });
-    UserActions.verifyEmail(this.context.dispatcher, email)
-      .then(() => {
+    handleVerifySubmit(email) {
         this.setState({
-          isLoading: false
+            isLoading: true
         });
-      })
-      .catch(() => {
-        // Don't forget to handle the error case!
-        this.setState({
-          isLoading: false
-        });
-      });
-  },
+        UserActions.verifyEmail(this.context.dispatcher, email)
+            .then(() => {
+                this.setState({
+                    isLoading: false
+                });
+            })
+            .catch(() => {
+                // Don't forget to handle the error case!
+                this.setState({
+                    isLoading: false
+                });
+            });
+    },
 //.........
 ```
 
@@ -159,7 +265,7 @@ also a good way to set default properties:
 
 ```javascript
 position = Object.assign({
-  position: "absolute"
+    position: "absolute"
 }, position);
 ```
 
