@@ -16,6 +16,10 @@ When joining the project you should look at the most recent pull requests that
 are being produced in a repo and try to follow their general style conventions.
 **The best way to learn a project's style is to read code.**
 
+If you are just getting started with JavaScript (especially modern use of the
+language), a great guide for general style is 
+[Airbnb's style guide](https://github.com/airbnb/javascript).
+
 If anything is unclear please ask!
 
 ## Babel and ES6
@@ -88,12 +92,15 @@ the anonymous function:
 () => this.setState({ foo: 'bar' });
 ```
 
-If the function you need to bind is a 1-line function you can just line the 
+If the function you need to bind is a 1-line function you can just inline the 
 expression:
 
 ```
 () => foo()
 ```
+
+1-line functions will return their last value, making them very convenient to 
+use in combination with iteration functions that expect a value like `.map()`.
 
 Otherwise, you will have to use curly braces to create a new block.
 
