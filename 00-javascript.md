@@ -118,18 +118,10 @@ Never use the `var self = this;` pattern.
 We have chosen to use the CommonJS syntax (`require()` and `module.exports`) for
 requiring and exporting modules.
 
-Include all your requires at the top of the file using `const`. Both single
-declaration and multiple declaration are valid.
+Include all your requires at the top of the file using `const`, using single declaration only.
 
 ```javascript
 // SomeComponent.js
-const React = require('react'),
-    classnames = require('classnames'),
-    { TiltLogo, TiltAirplane } = require('tilt-images'),
-    SendEmailLightbox = require('../lightboxes/SendEmailLightbox'),
-    LightboxBase = require('root/lightbox/LightboxBase');
-
-// SomeOtherComponent.js
 const React = require('react');
 const classnames = require('classnames');
 const { TiltLogo, TiltAirplane } = require('tilt-images');
