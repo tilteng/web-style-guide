@@ -27,7 +27,7 @@ module.exports = SessionActions;
 ```
 ### Basics
 * Pass the dispatcher as an argument
-* Define action names in a ```(x)Constants.js``` file
+* Define action names in a ```(x)Constants.js``` files
 
 ### Promises
 * Use Promises instead of callbacks. They're easy to chain and error handling is clean
