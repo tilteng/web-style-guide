@@ -35,5 +35,3 @@ module.exports = SessionActions;
 
 ## Dispatcher
 * Pass name of the store to retrieve it (```dispatcher.getStore('SomeStore')```), instead of passing the interface
-
-## Stores
