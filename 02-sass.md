@@ -1,4 +1,4 @@
-# SASS
+# SASS Best Practices
 
 Give color variables generic names
 
@@ -6,7 +6,7 @@ Bad `$tilt-blue; $tilt-almost-black`
 
 Good `$tilt-highlight; $tilt-soft`
 
-## Fonts
+# Fonts
 
 Tilt uses HelveticaNeueRoman as its primary font-family.  This is a non-free webfont and is defined in our CSS with a font-face definition. The proper font fallback order is:
 
@@ -23,7 +23,7 @@ We presently use 4 different font-weights for HelveticaNeueRoman, which the desi
 
 In general you should never need to override the font-family except for unusual circumstances such as styling an iframe.
 
-### More Information About Fonts
+## More Information About Fonts
 
 We use font-weight and font-face together to avoid the browser choosing a "faux-bold".
 
