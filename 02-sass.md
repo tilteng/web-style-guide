@@ -29,7 +29,7 @@ We use font-weight and font-face together to avoid the browser choosing a "faux-
 
 "Faux-bold", in addition to being ugly, will [break the display of colored emoji in Chrome](https://code.google.com/p/chromium/issues/detail?id=441946) (as of July 2015).
 
-We do not presently make usage of italics and there is no italic version of HelveticaNeueRoman currently available in the codebase.
+We do not presently make usage of italics and there is no italic version of HelveticaNeueRoman currently available in the codebase.  If you use `em` or `i` tags, or set `font-style: italic`, this will result in the browser applying a "faux-italic" version of the webfont, which may not be what you want - watch out!
 
 See also:
 
