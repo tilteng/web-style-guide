@@ -55,7 +55,7 @@ Stores similarly make "faking data" before a webservice call has completed reall
 
 The best implementation of a store:
 * corresponds to a `GET` endpoint from some upstream service (API)
-* stores data is completely parameterized by the `GET` arguments to that endpoint
+* is completely parameterized by the `GET` arguments to that endpoint (including query parameters - pagination excluded)
 * Action creators update the store state after receiving a new object and emit change
 * (Optional, your judgement for best UX vs complexity of the feature vs likelihood of persistence level failure) action creators "fake" updates in the store on user action before data is persisted
 
