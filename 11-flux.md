@@ -69,6 +69,8 @@ Try to avoid the store pattern for:
 
 Using stores to hold UI state is a bit of an antipattern.  Sometimes this is useful but what you're really getting out of it is the global access to the data.  This data is better passed down as props from a parent component rather than having a leaf component access the store.  If UI state needs as the result of a user action (e.g. a Flux action creator), consider passing a callback down from a parent component instead.
 
+Because stores are global data, UI stores can encode assumptions about the "singletonness" of your UI component into your views.  This leads to views that are harder to test and harder to extend. If you have a UI store for a component, you are unable to use that component twice on the page without parameterizing your UI store by mount point, e.g the `data-reactid` of the component in question.  You likely didn't mean to build these assumptions into your component so it is best to avoid UI stores in general.
+
 For example, rather that using a UI store to keep track of whether state is submitting or not, pass a callback to a child component that is used to invoke the submit which updates the state of the child component.
 
 ```javascript
