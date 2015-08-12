@@ -59,7 +59,7 @@ The best implementation of a store:
 
 A store backing the Tilt page - upstream API route `/tilts/:id`, would contain data inside of it parameterized by Tilt `id`.  This allows for storing data for multiple tilts in memory at once, which allows seamless transitions between different tilts without a page refresh.  As an example, we could preload data for a tilt when a user mouses over a notification in their notification center - on click, the page could be loaded automatically from memory, avoiding a loading screen.  
 
-This can lead to somewhat silly conclusions: "`/users/:id/notification` should be parameterized by user".  At first thought this is a bad conclusion, because only one user is ever logged in at once.  However, a store that is parameterized by user id would allow quickly switching between "active accounts", or displaying data from multiple accounts on the screen at once.  Building a store like this for present product requirements may be overdesign (and so not worth it) but it is good to think through these edge cases and understand the tradeoff that is being made ;)
+This can lead to somewhat silly conclusions: "`/users/:id/notifications` should be parameterized by user".  At first thought this is a bad conclusion, because only one user is ever logged in at once.  However, a store that is parameterized by user id would allow quickly switching between "active accounts", or displaying data from multiple accounts on the screen at once.  Building a store like this for present product requirements may be overdesign (and so not worth it) but it is good to think through these edge cases and understand the tradeoff that is being made ;)
 
 ### Try To Avoid
 
