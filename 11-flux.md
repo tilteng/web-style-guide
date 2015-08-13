@@ -68,6 +68,7 @@ This can lead to somewhat silly conclusions: "`/users/:id/notifications` should 
 Try to avoid the store pattern for:
 * data that better represents view state, e.g. errors temporarily displayed, submission in progress, or successfully finished
 * data that will never change (this is better owned and passed down as props from some parent component)
+* business logic functions on the store (e.g. `tiltStore.isSellItems()`) - these are better owned by a Model that wraps the store data and is passed down to the views as props
 
 Using stores to hold UI state is a bit of an antipattern.  Sometimes this is useful but what you're really getting out of it is the global access to the data.  This data is better passed down as props from a parent component rather than having a leaf component access the store.  If UI state needs as the result of a user action (e.g. a Flux action creator), consider passing a callback down from a parent component instead.
 
