@@ -2,7 +2,7 @@
 
 ## The Basics
 
-* 4 character space indents, no tabs
+* 2 character space indents, no tabs
 * Semicolons end a line
 * "Best effort" 80 character line limit.  Set a ruler in your editor.  Small 
   deviations are okay for very long strings that can't be reasonably broken
