@@ -155,7 +155,7 @@ if (this.props.mouseover) {
 }
 ```
 
-## Isomorphic Javascript
+## Universal Javascript
 
 Our code will run in the server and the browser. Some common assumptions of single
 environment Javascript are not valid in an Isomorphic world.
