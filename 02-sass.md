@@ -31,6 +31,8 @@ You should only use font-weights from the above.  What this means is:
 * Don't use `<strong>` or `<b>` tags without overriding the `font-weight` as default `<strong>` and `<b>` font-weight will be 700, for which we do not have a font-face definition
 * Don't use `font-weight` with a different value from the above (300, 400, 500, 600)
 * Only use `font-style: normal` - don't use italics
+* Don't use `bold-weight` for anything that could potentially display emoji, such as tilt titles, tilter names, comments, group names, etc. Chrome has a known bug that prevents the display of emoji for fonts-weights above 500.
+
 
 [1] note that this is different from the default `font-weight: bold` which would be `font-weight: 700;`
 
