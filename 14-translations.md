@@ -37,11 +37,22 @@ const count = ...;
 import { _, _n, _c, _nc } from 'web/root/translators';
 ```
 
-These mimic standard gettext functions, and all return a function. These returned functions must be invoked with a locale which essentially evaluate a translation. This is done for you in `LocalizedMessage` which has a locale in the context, otherwise you must do it yourself explicitly:
+These mimic standard gettext functions, and all return a function. These returned functions must be invoked with a locale. This is done for you in `LocalizedMessage` which has a locale in the context, otherwise you must do it yourself explicitly:
 ```javascript
 const locale = ...;
 <img alt={_('Hello')(locale)} />
 ```
+
+## Translator Components
+```javascript
+<LocalizedMessage timeAgo={<LocalizedTimeAgo date={...} />} message={_('You ate {timeAgo}!')} />
+```
+This component which can accept placeholder values of any type, including React nodes.
+
+```javascript
+<LocalizedHTMLMessage name={'<span class="highlight">Bob</span>'} message={_('Hello {name}!')} />
+``` 
+This component sets HTML directly using ```dangerouslySetInnerHTML``` and thus React nodes are not valid placeholder values.
 
 ## Extraction
 Using one of the functions above will mark a string for extraction into a standard gettext PO file. To extract strings, run `gulp extract`. You must pass strings directly into the functions for them to be captured.
