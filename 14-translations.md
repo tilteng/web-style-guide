@@ -78,32 +78,32 @@ Gettext utilize a language's plural rule, which varies wildly. As an example, fo
 Notice that for the French language, the plural rules is different from English. In some languages there is no distinction between singular and plural, and for others there are 6 plural forms with special rules.
 
 ## Best Practices
-1. <b>Extract only complete strings</b>
+1. **Extract only complete strings**
 
   The meaning of complete is hard to establish & finding the right balance can be difficult.
 
     * At the very least, do not ever split words like `Bird` and `(s)` (should be using plural tools anyway).
     * Do not split a sentence  like `Here are some things:` `one thing, second thing`.
     * Splitting a paragraph into sentences can be okay if the sentences do not depend on one another (or give context to one another).
-2. <b>Use context as necessary</b>
+2. **Use context as necessary**
 
   Some strings require more information about the context they are used in. For example, the string `Flag` can mean different things (one being literally a flag, another being 'to report' a comment for example). Context allows the same string 'Flag' to have different translations. 
 
   Although not the intention of context, you can use it to give small comments to the translator, such as about where a fragment belongs. Do your best to avoid this use case though.
-3. <b>Interpolate only with the provided tools</b>
+3. **Interpolate only with the provided tools**
 
   Do not concatenate user strings with `+` operator or templating tools from ES6. Rely solely on the provided components, or if doing string interpolation, use `interpolate` from the `Interpolator` module.
-4. <b>Re-use existing strings</b>
+4. **Re-use existing strings**
 
   Adding a string that differs only slightly adds little to no value but adds potential wait time for the translation.
-5. <b>Avoid HTML as much as possible</b>
+5. **Avoid HTML as much as possible**
   
   Injecting a string with HTML means going against React best practices. It also means making it more difficult for the translator. For example, it is hard to understand that `<div class='x'>Hello</div><div class='x'>World</div>` is style split the words into two lines. This is not often possible, but may be necessary to keep a string fully intact. 
 
-6. <b>Do not add strings to style sheets</b>
+6. **Do not add strings to style sheets**
 
   CSS does not allow extraction of strings. Avoid the `content` CSS property unless it's for symbols - even then it may not be a good idea as one symbol can mean something else in another language.
 
-7. <b>Avoid certain text transformations</b>
+7. **Avoid certain text transformations**
 
   The meaning of a string in one form (e.g. fully capitalized) may not be appropriate in another language. If your strings needs to be fully capitalized, it must be extracted as such so that translators can change the letter case. Avoid transformation through methods like `toUpperCase()` and `text-transform: uppercase;` which do not even work for certain characters.
