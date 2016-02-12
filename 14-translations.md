@@ -38,7 +38,7 @@ const count = ...;
 import { _, _n, _c, _nc } from 'web/root/translators';
 ```
 
-These mimic standard gettext functions, and all return a function. These returned functions must be invoked with a locale. This is done for you in `LocalizedMessage` which has a locale in the context, otherwise you must do it yourself explicitly:
+These mimic standard gettext functions, and all return a function. These returned functions must be invoked with a locale. This is done for you in `LocalizedMessage` which has a locale in the context, otherwise you must do it explicitly:
 ```javascript
 const locale = ...;
 <img alt={_('Hello')(locale)} />
@@ -58,13 +58,13 @@ This component which can accept placeholder values of any type, including React 
 This component sets HTML directly using ```dangerouslySetInnerHTML``` and thus React nodes are not valid placeholder values.
 
 ## Extraction
-Using one of the functions above will mark a string for extraction into a standard gettext PO file. To extract strings, run `gulp extract`. You must pass strings directly into the functions for them to be captured.
+Using one of the functions above will mark a string for extraction into a standard gettext PO file. To extract strings, run `gulp extract`. You must only pass strings as arguments into the functions for them to be marked for extraction.
 
 ## Messages
-A generated PO file is not used directly by server or client, and must first be converted into JSON. To generate messages for the client/server, run `gulp messages`.
+A generated PO file is not used directly by server or client, and must first be converted into JSON. To generate messages for the client/server, run `gulp messages`. Client will only download the messages set they need for their locale.
 
 ## Plurality
-Gettext utilize a language's plural rule, which varies wildly. As an example, for the snippet above:
+Gettext utilizes a language's plural rules, which varies wildly. As an example, for the snippet above:
 
 | Locale | friendCount | Output |
 | --- | --- | --- |
@@ -75,7 +75,7 @@ Gettext utilize a language's plural rule, which varies wildly. As an example, fo
 |  | 1 | Facebook (1) ami |
 |  | 2 | Facebook (2) amis |
 
-Notice that for the French language, the plural rules is different from English. In some languages there is no distinction between singular and plural, and for others there are 6 plural forms with special rules.
+Notice that for the French language (as a speaker from France), the plural rule is different from English. This is only a slight difference. In some languages there is no distinction between singular and plural, and for others there can be as many as 6 plural forms with special rules.
 
 ## Best Practices
 1. **Extract only complete strings**
@@ -84,12 +84,12 @@ Notice that for the French language, the plural rules is different from English.
 
     * At the very least, do not ever split words like `Bird` and `(s)` (should be using plural tools anyway).
     * Do not split a sentence  like `Here are some things:` `one thing, second thing`.
-    * Splitting a paragraph into sentences can be okay if the sentences do not depend on one another (or give context to one another).
+    * Splitting blocks of text into individual sentences can be fine if the sentences do not depend on one another (or give context to one another).
 2. **Use context as necessary**
 
   Some strings require more information about the context they are used in. For example, the string `Flag` can mean different things (one being literally a flag, another being 'to report' a comment for example). Context allows the same string 'Flag' to have different translations. 
 
-  Although not the intention of context, you can use it to give small comments to the translator, such as about where a fragment belongs. Do your best to avoid this use case though.
+  Although not the intention of context, you can also use it to give small comments to the translator, such as about where a fragment belongs. Do your best to avoid this use case though.
 3. **Interpolate only with the provided tools**
 
   Do not concatenate user strings with `+` operator or templating tools from ES6. Rely solely on the provided components, or if doing string interpolation, use `interpolate` from the `Interpolator` module.
@@ -106,4 +106,4 @@ Notice that for the French language, the plural rules is different from English.
 
 7. **Avoid certain text transformations**
 
-  The meaning of a string in one form (e.g. fully capitalized) may not be appropriate in another language. If your strings needs to be fully capitalized, it must be extracted as such so that translators can change the letter case. Avoid transformation through methods like `toUpperCase()` and `text-transform: uppercase;` which do not even work for certain characters.
+  The meaning of a string in one form (e.g. fully capitalized) may not be appropriate in another language. If your string needs to be fully capitalized, it must be extracted as such so that translators can change the case appropriately. Avoid text transformation through methods like `toUpperCase()` and `text-transform: uppercase;` which do not even work for certain characters.
