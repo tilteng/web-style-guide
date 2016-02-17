@@ -107,3 +107,7 @@ Notice that for the French language (as a speaker from France), the plural rule 
 7. **Avoid certain text transformations**
 
   The meaning of a string in one form (e.g. fully capitalized) may not be appropriate in another language. If your string needs to be fully capitalized, it must be extracted as such so that translators can change the case appropriately. Avoid text transformation through methods like `toUpperCase()` and `text-transform: uppercase;` which do not even work for certain characters.
+  
+8. **Consider string size**
+
+  This should be done early in the design process, but take the extra step to verify that your styling accomodates longer text length. 300% expansion from English is not uncommon in certain languages.
