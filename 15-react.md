@@ -4,7 +4,7 @@ Our react setup uses React, redux, Immutable.js and react-router.
 
 ## Pods
 
-We organize our React components inside of directories call pods, a name borrowed
+We organize our React components inside of directories called pods, a name borrowed
 from Ember. Each pod contains at least one main file that exports a component and
 can be referenced from other files using `import`;
 
