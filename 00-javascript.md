@@ -118,20 +118,16 @@ Never use the `var self = this;` pattern.
 We have chosen to use the ES6 syntax (`import` and `export`) for
 requiring and exporting modules.
 
-Include all your requires at the top of the file using `const`, using single declaration only.
-
 ```javascript
 // SomeComponent.js
-const React = require('react');
-const classnames = require('classnames');
-const { TiltLogo, TiltAirplane } = require('tilt-images');
-const SendEmailLightbox = require('../lightboxes/SendEmailLightbox');
-const LightboxBase = require('root/lightbox/LightboxBase');
+import React from 'react';
+import { Link } from 'react-router';
+import * as BrowserUtils from 'root/utils/BrowserUtils';
+import { findAllWithType, findWithType } from 'react-shallow-testutils';
 ```
 
 - Webpack generates a project that uses `root` as a base. It can be used as an
 alternative to relative paths on code that does not run in the express server.
-- Don't use default exports as they are not easy to include using CommonJS.
 - Don't require modules dynamically as this makes them hard to validate on compile
 time.
 
