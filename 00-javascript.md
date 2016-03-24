@@ -115,7 +115,7 @@ Never use the `var self = this;` pattern.
 
 ## Modules
 
-We have chosen to use the CommonJS syntax (`require()` and `module.exports`) for
+We have chosen to use the ES6 syntax (`import` and `export`) for
 requiring and exporting modules.
 
 Include all your requires at the top of the file using `const`, using single declaration only.
