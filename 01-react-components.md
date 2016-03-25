@@ -9,7 +9,7 @@
 
 ## Props
 
-```
+```javascript
 const { currentUser } = this.props;
 
 currentUser
@@ -17,7 +17,7 @@ currenUser // Lint picks up this typo
 currentUser
 ```
 vs
-```
+```javascript
 this.props.currentUser
 this.props.currenUser // Lint does not pick up the typo
 this.props.currentUser
