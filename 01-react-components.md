@@ -9,6 +9,7 @@
 
 ## Props
 
+Prefer destructuring assignment to direct usage of `this.props`:
 ```javascript
 const { currentUser } = this.props;
 
